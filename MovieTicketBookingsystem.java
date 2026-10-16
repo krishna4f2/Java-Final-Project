@@ -2,22 +2,21 @@ import java.util.Scanner;
 
 public class MovieTicketBookingsystem {
 
-    // ---------- Theatre setup ----------
+    //  Theatre setup 
     static final int ROWS = 5;          // rows A to E
     static final int COLS = 6;          // seats 1 to 6 in each row
 
-    // 2D array for seats: false = available, true = booked
+    
     static boolean[][] seats = new boolean[ROWS][COLS];
 
-    // 2D array to remember how much was paid for each seat (used for refund)
     static double[][] paid = new double[ROWS][COLS];
 
-    // ---------- Pricing ----------
+    // Pricing 
     static final double WEEKDAY_PRICE = 150;
     static final double WEEKEND_PRICE = 200;
     static int day;                     // 1 = Monday ... 7 = Sunday
 
-    // ---------- Movie details and rating ----------
+    //  Movie details and rating 
     static String movieName = "Jailer 2";
     static int ratingTotal = 45;        // sum of all ratings given so far
     static int ratingCount = 10;        // how many people rated
@@ -26,13 +25,13 @@ public class MovieTicketBookingsystem {
 
     public static void main(String[] args) {
 
-        // A few seats are already booked, so the seat chart looks realistic
+        
         seats[0][1] = true;  paid[0][1] = WEEKDAY_PRICE;   // A2
         seats[2][3] = true;  paid[2][3] = WEEKDAY_PRICE;   // C4
 
         System.out.println("===== WELCOME TO CINEMA BOOKING =====");
 
-        // Ask the show day until a valid number (1 to 7) is entered
+        
         do {
             System.out.print("Enter show day (1=Mon, 2=Tue, ... 6=Sat, 7=Sun): ");
             day = readInt();
@@ -65,7 +64,7 @@ public class MovieTicketBookingsystem {
         } while (choice != 6);
     }
 
-    // ---------- Module: Weekend Pricing ----------
+    //  Weekend Pricing 
     static double getPrice() {
         if (day == 6 || day == 7) {      // Saturday or Sunday
             return WEEKEND_PRICE;
@@ -74,7 +73,7 @@ public class MovieTicketBookingsystem {
         }
     }
 
-    // ---------- Module: Show Available Seats ----------
+    //  Show Available Seats 
     static void showSeats() {
         System.out.println("\n          SCREEN THIS WAY");
         System.out.println();
@@ -106,7 +105,7 @@ public class MovieTicketBookingsystem {
         System.out.println("Seats available: " + available + " / " + (ROWS * COLS));
     }
 
-    // ---------- Module: Book Ticket (with Discount Coupon) ----------
+    // Book Ticket (with Discount Coupon) 
     static void bookTicket() {
         showSeats();
 
@@ -149,7 +148,7 @@ public class MovieTicketBookingsystem {
         System.out.println("-------------------------");
     }
 
-    // ---------- Module: Discount Coupon ----------
+    // Discount Coupon 
     static double applyCoupon(double price, String code) {
         if (code.isEmpty()) {
             return price;                                  // no coupon entered
@@ -165,7 +164,7 @@ public class MovieTicketBookingsystem {
         }
     }
 
-    // ---------- Module: Cancel Ticket ----------
+    //  Cancel Ticket 
     static void cancelTicket() {
         System.out.print("Enter row of the booked seat (A-E): ");
         String rowInput = sc.nextLine().trim().toUpperCase();
@@ -196,7 +195,7 @@ public class MovieTicketBookingsystem {
         }
     }
 
-    // ---------- Module: Movie Rating ----------
+    // Movie Rating 
     static void rateMovie() {
         System.out.print("Rate " + movieName + " (1 to 5): ");
         int rating = readInt();
@@ -214,7 +213,7 @@ public class MovieTicketBookingsystem {
         System.out.printf("%s : %.1f / 5 (%d ratings)%n", movieName, average, ratingCount);
     }
 
-    // ---------- Helper: safe number input ----------
+    // 
     static int readInt() {
         try {
             return Integer.parseInt(sc.nextLine().trim());
